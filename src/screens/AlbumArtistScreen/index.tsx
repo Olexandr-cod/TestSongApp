@@ -13,7 +13,7 @@ import LoadingIndicator from '../../components/UI/LoadingIndicator';
 
 
 const AlbumArtistScreen = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<any>();
     const dispatch = useReduxDispatch();
     const { loading, currentPage, topAlbumData } = useReduxSelector(state => state?.artist);
 
@@ -35,14 +35,14 @@ const AlbumArtistScreen = () => {
                 <AlbumCard
                     name={item?.name}
                     img={item?.image[3]['#text'] !== '' ? item?.image[3]['#text'] : 'https://lastfm.freetls.fastly.net/i/u/174s/0fc7892659cf5d7046e6b4ce639d800c.png'}
-                    onPress={() => true}
+                    onPress={() => navigation.navigate(DASHBOARD_ROUTES.TRACKS_ALBUM_SCREEN)}
                 />
         );
-    }, []);
+    }, [navigation]);
 
     return (
         <FromContainer>
-            <HeaderInfo nameArtist={topAlbumData?.['@attr']?.artist} onPress={() => navigation.navigate(DASHBOARD_ROUTES.ARTIST_BIO_SCREEN)} />
+            <HeaderInfo nameArtist={topAlbumData?.['@attr']?.artist} onPress={() => navigation.navigate(DASHBOARD_ROUTES.ARTIST_BIO_SCREEN, { name: topAlbumData?.['@attr']?.artist })} />
             <FlatList
                 data={topAlbumData?.album}
                 keyExtractor={key => key?.name}

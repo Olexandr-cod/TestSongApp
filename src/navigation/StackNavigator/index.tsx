@@ -6,6 +6,7 @@ import CustomHeader from '../../components/navigator/CustomHeader';
 // Stack
 import AlbumArtistScreen from '../../screens/AlbumArtistScreen';
 import ArtistBioScreen from '../../screens/ArtistBioScreen';
+import TracksAlbumScreen from '../../screens/TracksAlbumScreen';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,13 @@ const StackNavigatorContainer = () => {
         component={ArtistBioScreen}
         options={{
           header: () => <CustomHeader title="About Artist" showBackBtn={true} />,
+        }}
+      />
+      <Stack.Screen
+        name={DASHBOARD_ROUTES.TRACKS_ALBUM_SCREEN}
+        component={TracksAlbumScreen}
+        options={{
+          header: () => <CustomHeader title="Tracks" showBackBtn={true} />,
         }}
       />
     </Stack.Navigator>

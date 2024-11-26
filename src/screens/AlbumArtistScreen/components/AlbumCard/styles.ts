@@ -8,5 +8,6 @@ export const cs = StyleSheet.create({
     impStyle: {
         height: 140,
         width: 140,
+        marginBottom: 5,
     },
 });

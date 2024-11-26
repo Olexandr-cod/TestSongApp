@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ArtistState, TopAlbums } from './types';
+import { ArtistInfo, ArtistState, TopAlbums } from './types';
 import { getArtistInfoAction, getTopAlbumAction } from './ArtistAction';
 
 
@@ -7,6 +7,7 @@ const initialState: ArtistState = {
   loading: false,
   topAlbumData: null,
   currentPage: 1,
+  artistOneData: null,
   error: null,
 };
 
@@ -47,8 +48,9 @@ export const artistSlice = createSlice({
       })
       .addCase(
         getArtistInfoAction.fulfilled,
-        (state, action: PayloadAction<TopAlbums>) => {
+        (state, action: PayloadAction<ArtistInfo>) => {
           state.loading = false;
+          state.artistOneData = action?.payload;
         },
       )
       .addCase(getArtistInfoAction.rejected, (state, action: PayloadAction<any>) => {
