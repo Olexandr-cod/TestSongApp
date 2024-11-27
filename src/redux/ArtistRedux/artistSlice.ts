@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ArtistInfo, ArtistState, TopAlbums } from './types';
-import { getArtistInfoAction, getTopAlbumAction } from './ArtistAction';
-
+import { ArtistInfo, ArtistState, TopAlbums, TrackType } from './types';
+import { getAlbumTracksAction, getArtistInfoAction, getTopAlbumAction } from './ArtistAction';
 
 const initialState: ArtistState = {
   loading: false,
   topAlbumData: null,
   currentPage: 1,
   artistOneData: null,
+  albumTracksData: [],
   error: null,
 };
 
@@ -56,10 +56,25 @@ export const artistSlice = createSlice({
       .addCase(getArtistInfoAction.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      //get album tracks
+      .addCase(getAlbumTracksAction.pending, state => {
+        state.loading = true;
+      })
+      .addCase(
+        getAlbumTracksAction.fulfilled,
+        (state, action: PayloadAction<TrackType[]>) => {
+          state.loading = false;
+          state.albumTracksData = action?.payload;
+        },
+      )
+      .addCase(getAlbumTracksAction.rejected, (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
-// export const {  } = artistSlice.actions;
+// export const {} = artistSlice.actions;
 
 export default artistSlice.reducer;

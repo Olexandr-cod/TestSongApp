@@ -5,6 +5,8 @@ import { cs } from './styles';
 import ButtonDefault from '../../UI/ButtonDefault';
 import { useNavigation } from '@react-navigation/native';
 
+const BACK_TEXT = '<- Back';
+
 interface CustomHeaderProps {
     title: string;
     showBackBtn?: boolean
@@ -26,7 +28,7 @@ const CustomHeader = ({ title, showBackBtn = false }: CustomHeaderProps) => {
             ]}>
             {!!showBackBtn && <ButtonDefault onPress={() => navigation.goBack()}>
                 <Text style={cs.textHeader}>
-                    {'<- Back'}
+                    {BACK_TEXT}
                 </Text>
             </ButtonDefault>}
             <Text style={cs.textHeader}>
@@ -34,7 +36,7 @@ const CustomHeader = ({ title, showBackBtn = false }: CustomHeaderProps) => {
             </Text>
             {!!showBackBtn && <ButtonDefault buttoStyles={{ opacity: 0 }} onPress={() => true}>
                 <Text style={cs.textHeader}>
-                    {'<- Back'}
+                    {BACK_TEXT}
                 </Text>
             </ButtonDefault>}
         </View>

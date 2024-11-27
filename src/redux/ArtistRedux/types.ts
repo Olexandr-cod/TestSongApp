@@ -3,6 +3,7 @@ export type ArtistState = {
   topAlbumData: TopAlbums | null,
   currentPage: number,
   artistOneData: ArtistInfo | null
+  albumTracksData: TrackType[]
   error: Error | null
 };
 
@@ -66,11 +67,6 @@ export type ArtistInfo = {
   };
 };
 
-export type ImageArtist = {
-  '#text': string;
-  size: 'small' | 'medium' | 'large' | 'extralarge' | 'mega' | '';
-};
-
 export type SimilarArtist = {
   name: string;
   url: string;
@@ -87,4 +83,23 @@ export type Link = {
   rel: string;
   href: string;
 };
+
+//For tracks album
+export type TrackType = {
+  streamable: {
+    fulltrack: string;
+    '#text': string;
+  };
+  duration: number;
+  url: string;
+  name: string;
+  '@attr': {
+    rank: number;
+  };
+  artist: {
+    url: string;
+    name: string;
+    mbid: string;
+  };
+}
 
