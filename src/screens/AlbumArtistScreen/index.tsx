@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect } from 'react';
 import { FlatList } from 'react-native';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { useReduxDispatch, useReduxSelector } from '../../store/store';
 import { getTopAlbumAction } from '../../redux/ArtistRedux/ArtistAction';
 import { Album } from '../../redux/ArtistRedux/types';
-import { useNavigation } from '@react-navigation/native';
 import { DASHBOARD_ROUTES } from '../../navigation/routes';
 import FromContainer from '../../components/layout/FromContainer';
 import AlbumCard from './components/AlbumCard';
@@ -11,9 +11,13 @@ import { cs } from './styles';
 import HeaderInfo from './components/HeaderInfo';
 import LoadingIndicator from '../../components/UI/LoadingIndicator';
 
+type DashboardRoutes = {
+    Tracks_Album_Screen: { name: string; album: string };
+    Artist_Bio_Screen: { name: string | undefined };
+};
 
 const AlbumArtistScreen = () => {
-    const navigation = useNavigation<any>();
+    const navigation = useNavigation<NavigationProp<DashboardRoutes>>();
     const dispatch = useReduxDispatch();
     const { loading, currentPage, topAlbumData } = useReduxSelector(state => state?.artist);
 

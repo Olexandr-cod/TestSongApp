@@ -1,15 +1,21 @@
 import React, { useEffect } from 'react';
 import { Text, ScrollView } from 'react-native';
+import { useRoute, RouteProp } from '@react-navigation/native';
 import FromContainer from '../../components/layout/FromContainer';
 import { useReduxDispatch, useReduxSelector } from '../../store/store';
 import { getArtistInfoAction } from '../../redux/ArtistRedux/ArtistAction';
-import { useRoute } from '@react-navigation/native';
 import { cs } from './styles';
 
 const BIOGRAPHY_TEXT = 'Biography';
 
+type ArtistBioRouteParams = {
+    ArtistBioScreen: {
+        name: string;
+    };
+};
+
 const ArtistBioScreen = () => {
-    const { params } = useRoute<any>();
+    const { params } = useRoute<RouteProp<ArtistBioRouteParams, 'ArtistBioScreen'>>();
     const dispatch = useReduxDispatch();
     const { artistOneData } = useReduxSelector(state => state?.artist);
 
